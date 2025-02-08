@@ -1,9 +1,13 @@
-# product_cat_prediction
-This is an api to train and predict product categories based on descriptions
+## Rakuten product prediction
 
-parler du projet, des tests avec pytest, versioning of data DVC, xgboost, modularity
+This project aims to develop an API-driven solution for classifying electronic products based on textual descriptions. Using a dataset provided by the Rakuten Challenge https://challengedata.ens.fr/challenges/35 in CSV format, it serves as the input for building a Word2Vec model after normalization.
 
-
+With FastAPI, a series of GET and POST endpoints were implemented to:
+  -> Load the dataset.
+  -> Train the XGBoost model with user-defined hyperparameters.
+  -> Predict the category of a free-text input.
+  
+All experiments are logged using MLflow, enabling users to track hyperparameter evolution and model performance. For data versioning, DVC (Data Version Control) is used.
 
 
 ### Setup API
