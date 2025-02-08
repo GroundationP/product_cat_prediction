@@ -1,7 +1,7 @@
 import pytest
 import sys
 import os#
-src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "/Users/terence/A_NOTEBOOKS/Datasciencetest/PROJET_RAKUTEN/project/app"))
+src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "address.../project/app"))
 sys.path.append(src_path) #  Add 'src' to Python path
 import utils_and_constants # import data_load, wordcloud
 import wordcloud
@@ -9,7 +9,7 @@ import wordcloud
 
 
 #  Load the CSV file
-PATH = "/Users/terence/A_NOTEBOOKS/Datasciencetest/PROJET_RAKUTEN/project/data/original/"
+PATH = "address.../project/data/original/"
 files = ['X_train_update.csv', 'Y_train_CVw08PX.csv', 'X_test_update.csv']
 
 @pytest.fixture
