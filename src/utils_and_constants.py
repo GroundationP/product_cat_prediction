@@ -290,6 +290,6 @@ word_dict = {}
 le = LabelEncoder()
 
 # Load the CSV file
-PATH = "/Users/terence/A_NOTEBOOKS/Datasciencetest/PROJET_RAKUTEN/project/data/original/"
+PATH = "address.../project/data/original/"
 files = ['X_train_update_copil.csv', 'Y_train_update_copil.csv', 'X_test_update.csv']  # large file
 files = ['X_train_update.csv', 'Y_train_CVw08PX.csv', 'X_test_update.csv']
