@@ -1,6 +1,6 @@
 ## Rakuten product prediction
 
-This project aims to develop an API-driven solution for classifying electronic products based on textual descriptions. Using a dataset provided by the Rakuten Challenge https://challengedata.ens.fr/challenges/35 in CSV format, it serves as the input for building a Word2Vec model after normalization.
+This project aims to develop an API-driven solution for classifying electronic products based on textual descriptions. Using a dataset provided by the Rakuten Challenge https://challengedata.ens.fr/challenges/35 in CSV format the files and images were ingested into a MongoDB and the API use those files for building a Word2Vec model after normalization.
 
 With FastAPI, a series of GET and POST endpoints were implemented to:
 
@@ -80,4 +80,17 @@ git commit -m "First data versioning with DVC (input files)"
 dvc push
 
 git push
+
+
+
+#### To start docker MongoDB
+docker-compose up -d
+
+docker exec -it my_mongo bash 
+
+mongosh -u li -p pw
+
+db.fs.files.find()
+
+
 
