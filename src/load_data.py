@@ -4,12 +4,6 @@ from fastapi import FastAPI
 import pandas as pd
 
 
-# FastAPI app instance
-#app = FastAPI(title="Product classification",
-#              description="API powered by FastAPI.",
-#              version="1.0.1")
-
-
 #@app.get("/upload_train_csv")
 def get_data_train():
     """Please click on 'Try it out' and 'execute'
