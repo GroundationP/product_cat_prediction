@@ -3,8 +3,8 @@ from PIL import Image
 from pymongo import MongoClient
 from gridfs import GridFS
 
-client = MongoClient(host="localhost", port=27017, username="datascientest", password="dst123")
-db = client["photos"]
+client = MongoClient(host="localhost", port=27017, username="li", password="pw")
+db = client["rakuten_db"]
 fs = GridFS(db)
 
 
