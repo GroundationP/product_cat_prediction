@@ -1,4 +1,5 @@
-from load_data import app
+from load_data_mongodb import app, get_all_files, get_file_by_key, get_image
+#from load_data import app
 from train_model import train_model
 from utils_and_constants import data_eng
 from fastapi import HTTPException
@@ -44,3 +45,7 @@ def predict(data: list[dict]):
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     return {"predictions": predictions.tolist()}
+    
+    
+    
+
