@@ -15,13 +15,12 @@ All experiments are logged using MLflow, enabling users to track hyperparameter 
 
 ### Setup API
 #### To create environment
+```
 python3 -m venv env_rakuten
-
 cd env_rakuten/bin
-
 source activate env_rakuten
-
 pip install -r requirements.txt
+```
 
 #### To call process via bash
 chmod +x run_server.sh (first time only)
