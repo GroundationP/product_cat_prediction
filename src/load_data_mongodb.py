@@ -4,20 +4,25 @@ from pymongo import MongoClient
 from gridfs import GridFS
 import io
 
+from auth import app, get_api_key, secure
+from fastapi import HTTPException
+from fastapi import Security, Depends, FastAPI, HTTPException, status
+from fastapi.security.api_key import APIKeyHeader, APIKey
+
 # FastAPI app instance
-app = FastAPI(title="Product classification",
-              description="API powered by FastAPI.",
-              version="1.0.1")
+#app = FastAPI(title="Product classification",
+#              description="API powered by FastAPI.",
+#              version="1.0.1")
 
 
 # MongoDB connection
-client = MongoClient(host="localhost", port=27017, username="li", password="pw")
+client = MongoClient(host="localhost", port=27017, username="datascientest", password="dst123")
 db = client["rakuten_db"]
 collection = db["fs.files"]
 fs = GridFS(db)
 
 @app.get("/files")
-def get_all_files():
+def get_all_files(api_key_header: APIKey = Depends(get_api_key)):
     """Retrieve top 100 documents from mongodb. click on 'Try it out' and 'execute'"""
     files = collection.find()
     # Convert documents to list and ObjectId to string
@@ -28,7 +33,7 @@ def get_all_files():
     return results
     
 @app.get("/file/{key}")
-def get_file_by_key(key: str):
+def get_file_by_key(key: str, api_key_header: APIKey = Depends(get_api_key)):
     """Retrieve a document from Mongodb using the 'key'
     Args:
     value less than 85k
@@ -47,7 +52,7 @@ def get_file_by_key(key: str):
     return document
     
 @app.get("/image/{filename}")
-async def get_image(filename: str):
+async def get_image(filename: str, api_key_header: APIKey = Depends(get_api_key)):
     """Retrieve an image from Mongodb using the 'key'
     Args:
     value less than 85k

@@ -7,9 +7,14 @@ from xgboost import XGBClassifier
 import joblib
 from sklearn.metrics import accuracy_score
 
+from auth import app, get_api_key, secure
+from fastapi import HTTPException
+from fastapi import Security, Depends, FastAPI, HTTPException, status
+from fastapi.security.api_key import APIKeyHeader, APIKey
+
 
 @app.post("/train")
-def train_model(params: TrainRequest, run_name_entry):
+def train_model(params: TrainRequest, run_name_entry, api_key_header: APIKey = Depends(get_api_key)):
     """ This new version is using MLflow to store tests. To start using:
     1 - Please click on 'Try it out'.
     2 - Select a mlflow run name (Ex: first run)
@@ -49,6 +54,7 @@ def train_model(params: TrainRequest, run_name_entry):
             eval_metric="mlogloss"
         )
         xgb.fit(X_train, y_train)
+        print(X_train.shape)
         # Evaluate the model
         pred_Xtrain_xgb = xgb.predict(X_train)
         pred_Xtest_xgb = xgb.predict(X_test)

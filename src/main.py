@@ -1,7 +1,15 @@
-from load_data_mongodb import app, get_all_files, get_file_by_key, get_image
+from load_data_mongodb import get_all_files, get_file_by_key, get_image
+
+
+from load_data import get_data_train
 from train_model import train_model
 from utils_and_constants import data_eng
+
+from auth import app, get_api_key, secure
 from fastapi import HTTPException
+from fastapi import Security, Depends, FastAPI, HTTPException, status
+from fastapi.security.api_key import APIKeyHeader, APIKey
+
 import pandas as pd
 import joblib
 import json
@@ -9,7 +17,7 @@ import json
 
 # Endpoint to predict with the trained model
 @app.post("/predict")
-def predict(data: list[dict]):
+def predict(data: list[dict], api_key_header: APIKey = Depends(get_api_key)):
     """Before predict, please make sure the model is trained.
     The input format must follow the schema [{"designation":"text"}] 
     Args:

@@ -1,11 +1,16 @@
-from load_data_mongodb import app
+#from load_data_mongodb import app
 from utils_and_constants import data_load, PATH, files
 from fastapi import FastAPI
 import pandas as pd
 
+from auth import app, get_api_key, secure
+from fastapi import HTTPException
+from fastapi import Security, Depends, FastAPI, HTTPException, status
+from fastapi.security.api_key import APIKeyHeader, APIKey
+
 
 #@app.get("/upload_train_csv")
-def get_data_train():
+def get_data_train(api_key_header: APIKey = Depends(get_api_key)):
     """Please click on 'Try it out' and 'execute'
     to load a sample of the dataset
     Args:
