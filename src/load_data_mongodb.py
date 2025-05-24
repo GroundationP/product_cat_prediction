@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
+import pymongo
 from pymongo import MongoClient
 from gridfs import GridFS
 import io
@@ -9,6 +10,8 @@ from fastapi import HTTPException
 from fastapi import Security, Depends, FastAPI, HTTPException, status
 from fastapi.security.api_key import APIKeyHeader, APIKey
 
+import os
+
 # FastAPI app instance
 #app = FastAPI(title="Product classification",
 #              description="API powered by FastAPI.",
@@ -16,6 +19,11 @@ from fastapi.security.api_key import APIKeyHeader, APIKey
 
 
 # MongoDB connection
+
+#MONGO_URL = os.environ.get("MONGO_URL")
+#client = MongoClient(MONGO_URL)
+
+#client = MongoClient("localhost://datascientest:dst123@mongodb:27017/")
 client = MongoClient(host="localhost", port=27017, username="datascientest", password="dst123")
 db = client["rakuten_db"]
 collection = db["fs.files"]

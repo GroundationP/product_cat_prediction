@@ -70,6 +70,12 @@ def train_model(params: TrainRequest, run_name_entry, api_key_header: APIKey = D
         mlflow.log_metric("accuracy test", accuracy_test)
         # Log the model
         mlflow.xgboost.log_model(xgb, "xgboost_classifier_model")
+        
+        # Register model
+        model_uri = "runs:/{}/model".format(mlflow.active_run().info.run_id)
+        mlflow.register_model(model_uri, "RakutenModel")
+        
+        
     # save the model to disk
     try:
         filename = 'app/models/best_xgb.pkl'
