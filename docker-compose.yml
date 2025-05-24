@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: datascientest
+      MONGO_INITDB_ROOT_PASSWORD: dst123
+
+
+  fastapi_app:
+    build:
+      context: .
+    container_name: rakuten-app
+    depends_on:
+      - mongodb
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGO_URL=mongodb://datascientest:dst123@host.docker.internal:27017/?authSource=admin
