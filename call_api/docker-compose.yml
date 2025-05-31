@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: terencegeobh/mongodb:latest
+    container_name: mongodb_re
+    ports:
+      - "27019:27017"
+    volumes:
+      - mongodb-data:/data/db
+
+  ml-pipeline:
+    image: terencegeobh/rakuten-app:latest
+    container_name: rakuten-app_re
+    ports:
+      - "8001:8000"
+      - "5052:5001"
+    depends_on:
+      - mongodb
+
+volumes:
+  mongodb-data:
