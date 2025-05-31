@@ -15,15 +15,18 @@ All experiments are logged using MLflow, enabling users to track hyperparameter 
 # ##############################
 # to call API via dockerhub
 ### after cloning
+```
 cd ./call_api
 docker compose up -d
-
+```
 ### API's will be available at
+```
 localhost:8001/docs
 localhost:5000
 
 API password: MLOPS
 Enjoy
+```
 # ##############################
 
 
