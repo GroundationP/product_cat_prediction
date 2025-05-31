@@ -5,10 +5,15 @@ services:
     image: mongo:7.0
     container_name: mongodb
     ports:
-      - "27017:27017"
+      - "27018:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: datascientest
       MONGO_INITDB_ROOT_PASSWORD: dst123
+    volumes:
+      - mongodb-data:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - mlnet
 
 
   fastapi_app:
@@ -19,5 +24,19 @@ services:
       - mongodb
     ports:
       - "8000:8000"
+      - "5001:5001"
     environment:
-      - MONGO_URL=mongodb://datascientest:dst123@host.docker.internal:27017/?authSource=admin
+      - MONGO_HOST=mongodb
+      - MONGO_PORT=27017
+      - MONGO_USERNAME=datascientest
+      - MONGO_PASSWORD=dst123
+    networks:
+      - mlnet
+    volumes:
+      - ./app:/app
+
+volumes:
+  mongodb-data:
+
+networks:
+  mlnet:
