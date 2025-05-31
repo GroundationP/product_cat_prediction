@@ -1,6 +1,4 @@
-#from load_data_mongodb import get_all_files, get_file_by_key, get_image
-
-
+from load_data_mongodb import get_all_files, get_file_by_key, get_image
 from load_data import get_data_train
 from train_model import train_model
 from utils_and_constants import data_eng
@@ -14,16 +12,7 @@ import pandas as pd
 import joblib
 import json
 
-# FastAPI app instance
-#app = FastAPI(title="Product classification",
-#              description="API powered by FastAPI.",
-#              version="1.0.1")
 
-
-#@app.get("/")
-#def read_root():
-#    return {"message": "Welcome to the FastAPI application"}
-    
 # Endpoint to predict with the trained model
 @app.post("/predict")
 def predict(data: list[dict], api_key_header: APIKey = Depends(get_api_key)):

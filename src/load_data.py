@@ -8,7 +8,6 @@ from fastapi import HTTPException
 from fastapi import Security, Depends, FastAPI, HTTPException, status
 from fastapi.security.api_key import APIKeyHeader, APIKey
 
-
 #@app.get("/upload_train_csv")
 def get_data_train(api_key_header: APIKey = Depends(get_api_key)):
     """Please click on 'Try it out' and 'execute'

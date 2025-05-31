@@ -1,6 +1,5 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
-import pymongo
 from pymongo import MongoClient
 from gridfs import GridFS
 import io
@@ -19,12 +18,19 @@ import os
 
 
 # MongoDB connection
+#client = MongoClient(host="localhost", port=27017, username="datascientest", password="dst123")
+#client = MongoClient("mongodb://datascientest:dst123@mongodb:27017/")
+#client = MongoClient("mongodb://datascientest:dst123@mongodb:27018/")
 
-#MONGO_URL = os.environ.get("MONGO_URL")
-#client = MongoClient(MONGO_URL)
 
-#client = MongoClient("localhost://datascientest:dst123@mongodb:27017/")
-client = MongoClient(host="localhost", port=27017, username="datascientest", password="dst123")
+client = MongoClient(
+    host=os.getenv("MONGO_HOST", "localhost"),
+    port=int(os.getenv("MONGO_PORT", 27017)),
+    username=os.getenv("MONGO_USERNAME"),
+    password=os.getenv("MONGO_PASSWORD"),
+)
+
+
 db = client["rakuten_db"]
 collection = db["fs.files"]
 fs = GridFS(db)
