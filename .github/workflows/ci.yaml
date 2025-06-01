@@ -1,26 +1,35 @@
-name: DockerHub Login Test
+# .github/workflows/ci.yaml
+name: CI
 
 on:
-  workflow_dispatch:
+  push:        # Toutes les branches
+  pull_request:
 
 jobs:
-  docker-login-test:
+  ci:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Debug secret presence (safe)
-        run: |
-          echo "Username length: ${#DOCKERHUB_USERNAME}"
-          echo "Password length: ${#DOCKERHUB_TOKEN}"
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          python-version: '3.11'
 
-      - name: Pull a test image
-        run: docker pull hello-world
+      - name: Install dependencies
+        run: |
+          pip install flake8 pytest
+
+      - name: Run linter (flake8)
+        run: |
+          flake8 .
+
+      - name: Run tests (pytest)
+        run: |
+          pytest
+
+      - name: Build Docker images (compose)
+        run: |
+          docker compose build
