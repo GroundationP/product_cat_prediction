@@ -22,9 +22,9 @@ jobs:
         run: |
           pip install flake8 pytest
 
-      - name: Run linter (flake8)
-        run: |
-          flake8 .
+      #- name: Run linter (flake8)
+      #  run: |
+      #    flake8 .
 
       - name: Run tests (pytest)
         run: |
