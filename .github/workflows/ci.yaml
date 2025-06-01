@@ -44,9 +44,9 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build Docker images (compose)
-        run: |
-          docker compose build
+      #- name: Build Docker images (compose)
+      #  run: |
+      #    docker compose build
 
 
 
